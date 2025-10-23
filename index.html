@@ -41,9 +41,10 @@
   .af-cold { background:#0066cc  }  /* cold resist */
   .af-gold { background:#0066cc; color:#111 } /* example */
   /* name classes */
-  .name-rw{background:#666666;color:#f9d71c;font-weight:600}
+  .name-rw{background:#666666;font-weight:600}
   .name-set{color:limegreen;font-weight:600}
-  .name-uq{color:gold;font-weight:600}
+  .name-uq{background:#996600;color:000;font-weight:600}
+  .name-bs{background:#0066cc;color:000;font-weight:600}
   /* small helper for empty cells */
   .empty {color:#999;font-style:italic}
   @media (max-width:900px){
@@ -123,61 +124,11 @@
   </thead>
   
   <tbody>
-<!--RWS-->
-  <!--Ancients' Pledge-->
-    <tr>
-    <!-- NAZWA-->
-      <td class="name-rw">
-        <div class="param">Ancients' Pledge</div>
-      </td>
-    <!-- LVL-->
-      <td>
-        <div class="param">1</div>
-      </td>
-    <!-- TYP-->
-      <td>
-        <div class="param">all</div>
-      </td>
-    <!-- KLASA -->
-      <td>
-        <div class="param">runeword</div>
-      </td>
-    <!-- AFFIXY -->
-      <td>
-        <div class="param af-resall">all resist</div>
-        <div class="param af-cold">cold resist</div>
-        <div class="param af-life">damage to mana</div>
-      </td>
-    <!-- WARTOSCI -->
-      <td>
-        <div class="param af-resall">+13%</div>
-        <div class="param af-cold">+30%</div>
-        <div class="param af-life">+10%</div>
-      </td>
-    <!-- RECEPTA -->
-      <td>
-      <div class="param">no</div>
-      </td>
-    <!-- RW -->
-      <td>
-        <div class="param">ral</div>
-        <div class="param">ort</div>
-        <div class="param">tal</div>
-      </td>
-    <!-- SET -->
-      <td>
-        <div class="param">no</div>
-      </td>
-    <!-- SETAFX -->
-      <td>
-        <div class="param">no</div>
-      </td>
-    </tr>
 <!-- CUBE -->
  <!--Horadric Staff-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Horadric Staff</div>
       </td>
     <!-- LVL-->
@@ -218,11 +169,11 @@
       <td>
         <div class="param">-</div>
       </td>
-    </tr><!--Khalim's Will-->
+    </tr>
  <!--Khalim's Will-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Khalim's Will</div>
       </td>
     <!-- LVL-->
@@ -268,7 +219,7 @@
  <!--Wirt's Leg-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Wirt's Leg</div>
       </td>
     <!-- LVL-->
@@ -313,7 +264,7 @@
  <!--Base Item-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Base Item</div>
       </td>
     <!-- LVL-->
@@ -358,7 +309,7 @@
  <!--Reroll Base Item-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Reroll Base Item</div>
       </td>
     <!-- LVL-->
@@ -404,7 +355,7 @@
 
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Gem Upgrade</div>
       </td>
     <!-- LVL-->
@@ -448,7 +399,7 @@
  <!--Gem Downgrade-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Gem Downgrade</div>
       </td>
     <!-- LVL-->
@@ -491,7 +442,7 @@
  <!--Rune Upgrade-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Rune Upgrade</div>
       </td>
     <!-- LVL-->
@@ -535,7 +486,7 @@
  <!--Rune Downgrade-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Rune Downgrade</div>
       </td>
     <!-- LVL-->
@@ -578,7 +529,7 @@
  <!--Socket Punch-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
          <div class="param">Socket Punch</div>
       </td>
     <!-- LVL-->
@@ -625,7 +576,7 @@
  <!--UnSocket-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">UnSocket</div>
       </td>
     <!-- LVL-->
@@ -674,7 +625,7 @@
  <!--Reroll-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Reroll</div>
       </td>
     <!-- LVL-->
@@ -721,7 +672,7 @@
  <!--Jewel Reroll-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">Jewel Reroll</div>
       </td>
     <!-- LVL-->
@@ -766,7 +717,7 @@
  <!--CHEAT1-->
     <tr>
     <!-- NAZWA-->
-      <td class="name-uq">
+      <td class="name-bs">
         <div class="param">CHEAT1</div>
       </td>
     <!-- LVL-->
@@ -808,10 +759,108 @@
         <div class="param">-</div>
       </td>
     </tr>
+ <!--CHEAT2-->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-bs">
+        <div class="param">CHEAT2</div>
+      </td>
+    <!-- LVL-->
+      <td>
+        <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+        <div class="param">rune</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+        <div class="param">misc</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">antidote potion</div>
+        <div class="param">antidote potion</div>
+        <div class="param">antidote potion</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    </tr>
+<!--UQ-->
+ <!--The Gnasher-->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-uq">
+        <div class="param">The Gnasher</div>
+      </td>
+    <!-- LVL-->
+      <td>
+        <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+        <div class="param">hand axe</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+        <div class="param">unique</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param af-resall">enhanced damage</div>
+        <div class="param af-cold">crushing blow</div>
+        <div class="param af-life">open wounds</div>
+        <div class="param af-life">strength</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">+70%</div>
+        <div class="param af-cold">+20%</div>
+        <div class="param af-life">+50%</div>
+        <div class="param af-life">+8</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">axe</div>
+        <div class="param">el rune</div>
+        <div class="param">jewel</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">-</div>
+      </td>
+    </tr>
 
-  </tbody>
+
+
+</tbody>
 </table>
-
 <script>
 /* Populate select filters with uq values from each column */
 function populateSelects() {
