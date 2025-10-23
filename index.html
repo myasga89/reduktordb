@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <meta charset="utf-8" />
 <title>Diablo 2 Runewords - Filterable Table (Fixed selects + cell borders)</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
   :root{
-    --bg:#1b1b1b; --panel:#2c2c2c; --muted:#ccc; --cell-border:#888;
+    --bg:#000; --panel:#666666; --muted:#ccc; --cell-border:#888;
   }
-  body{font-family: "Roboto",sans-serif;background:var(--bg);color:#f0f0f0;margin:16px;}
-  h2{text-align:center;color:#f9d71c;margin-bottom:12px;}
+  body{font-family: Roboto,sans-serif;background:var(--bg);color:#fff;margin:12px;}
+  h2{text-align:center;color:#f9d71c;margin-bottom:2px;}
   table{width:100%;border-collapse:collapse;table-layout:fixed;}
-  th,td{padding:8px;text-align:left;vertical-align:top;word-wrap:break-word;border:1px solid var(--cell-border);}
+  th,td{padding:2px;text-align:left;vertical-align:top;word-wrap:break-word;border:1px solid var(--cell-border);}
   th{background:var(--panel);position:sticky;top:0;color:#f9d71c;}
-  tr:nth-child(even){background:#222}
-  tr:hover{background:#3a3a3a}
+
+  tr:nth-child(even){background:#000;}
+  th:nth-child(1), td:nth-child(1) { width: 150px; }
+  th:nth-child(2), td:nth-child(2) { width: 80px; }
+  th:nth-child(3), td:nth-child(3) { width: 120px; }
+  th:nth-child(4), td:nth-child(4) { width: 120px; }
+  th:nth-child(6), td:nth-child(6) { width: 120px; }
+  th:nth-child(7), td:nth-child(7) { width: 150px; }
+  th:nth-child(8), td:nth-child(8) { width: 90px; }
+  th:nth-child(10), td:nth-child(10) { width: 120px; }
+
+  tr:hover{background:#666666}
   .controls{display:block;}
-  select.filter, input.filter{width:100%;box-sizing:border-box;padding:6px;margin-top:6px;background:#333;border:1px solid #555;color:#fff;border-radius:4px}
-  .param{display:block;padding:4px 6px;margin:4px 0;border-radius:6px;color:#fff;font-weight:600;}
+  select.filter, input.filter{width:100%;box-sizing:border-box;padding:6px;margin-top:6px;background:#000;border:1px solid #000;color:#f9d71c;border-radius:4px}
+  .param{display:block;padding:2px 4px;margin:1px 0;border-radius:2px;font-weight:600;}
   /* param colors (examples, distinct shades) */
-  .stat-ed { background:#ff6b6b }   /* enhanced damage */
-  .stat-life { background:#ff9f43 } /* life/extra life */
-  .stat-str { background:#ffd166 }  /* strength */
-  .stat-frw { background:#6bcfff }  /* faster run/walk */
-  .stat-fcr { background:#4ad9a9 }  /* faster cast rate */
-  .stat-resall { background:#86efac }/* resist all */
-  .stat-cold { background:#b3f0ff }  /* cold resist */
-  .stat-gold { background:#f6d365; color:#111 } /* example */
+  .af-ed { background:#ff0000;color:#f9d71c }   /* enhanced damage */
+  .af-life { background:#cc7a00 } /* life/extra life */
+  .af-str { background:#ffd166 }  /* strength */
+  .af-frw { background:#6bcfff }  /* faster run/walk */
+  .af-fcr { background:#4ad9a9 }  /* faster cast rate */
+  .af-resall { background:#0066cc }/* resist all */
+  .af-cold { background:#0066cc  }  /* cold resist */
+  .af-gold { background:#f6d365; color:#111 } /* example */
   /* name classes */
-  .name-runeword{color:silver;font-weight:700}
-  .name-set{color:limegreen;font-weight:700}
-  .name-unique{color:gold;font-weight:700}
+  .name-rw{background:#666666;color:#f9d71c;font-weight:600}
+  .name-set{color:limegreen;font-weight:600}
+  .name-uq{color:gold;font-weight:600}
   /* small helper for empty cells */
   .empty {color:#999;font-style:italic}
   @media (max-width:900px){
@@ -41,153 +54,399 @@
 </head>
 <body>
 
-<h2>DIABLO II RUNEWORDS & SETS — Filterable Table</h2>
-
-<p style="text-align:center;color:#bbb;margin-bottom:8px">Selecty w nagłówkach wypełniają się automatycznie z zawartości tabeli. Wybierz wartość z listy lub wpisz tekst — oba filtry łączą się (AND).</p>
+<h2>DIABLO II RESURRECTED MOD REDUKTOR ITEMS</h2>
 
 <table id="runewordTable" aria-label="Runewords table">
   <thead>
     <tr>
       <th>
-        Name
+        NAME
         <select class="filter" data-col="0" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="0" type="text" placeholder="Filter Name" oninput="filterAllColumns()">
+        <input class="filter" data-col="0" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Type
+        LVLREQ
         <select class="filter" data-col="1" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="1" type="text" placeholder="Filter Type" oninput="filterAllColumns()">
+        <input class="filter" data-col="1" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Class
+        TYPE
         <select class="filter" data-col="2" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="2" type="text" placeholder="Filter Class" oninput="filterAllColumns()">
+        <input class="filter" data-col="2" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Description
+        CLASS
         <select class="filter" data-col="3" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="3" type="text" placeholder="Filter Description" oninput="filterAllColumns()">
+        <input class="filter" data-col="3" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Numbers
+        AFFIXES
         <select class="filter" data-col="4" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="4" type="text" placeholder="Filter Numbers" oninput="filterAllColumns()">
+        <input class="filter" data-col="4" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Cube Ingredients
+        VALUE
         <select class="filter" data-col="5" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="5" type="text" placeholder="Filter Cube" oninput="filterAllColumns()">
+        <input class="filter" data-col="5" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Runeword Keyword
+        CUBE RECIEPE
         <select class="filter" data-col="6" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="6" type="text" placeholder="Filter Keywords" oninput="filterAllColumns()">
+        <input class="filter" data-col="6" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Set Description
+        RUNEWORD
         <select class="filter" data-col="7" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="7" type="text" placeholder="Filter Set Desc" oninput="filterAllColumns()">
+        <input class="filter" data-col="7" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
 
       <th>
-        Set Numbers
+        SET AFFIXES
         <select class="filter" data-col="8" onchange="filterAllColumns()"></select>
-        <input class="filter" data-col="8" type="text" placeholder="Filter Set Numbers" oninput="filterAllColumns()">
+        <input class="filter" data-col="8" type="text" placeholder="Filter" oninput="filterAllColumns()">
       </th>
+      
+      <th>
+        SET VALUE
+        <select class="filter" data-col="9" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="9" type="text" placeholder="Filter" oninput="filterAllColumns()">
+      </th>
+
     </tr>
   </thead>
-
+  
   <tbody>
-    <!-- Example rows -->
+<!--RWS-->
+  <!--Ancients' Pledge-->
     <tr>
-      <td class="name-runeword"><div class="param">Ancients' Pledge</div></td>
-      <td><div class="param">All</div></td>
-      <td><div class="param">Runeword</div></td>
-
-      <td>
-        <div class="param stat-resall">All Resistances</div>
-        <div class="param stat-cold">Cold Resist</div>
-        <div class="param stat-life">Damage To Mana</div>
+    <!-- NAZWA-->
+      <td class="name-rw">
+      <div class="param">Ancients' Pledge</div>
       </td>
-
+    <!-- LVL-->
       <td>
-        <div class="param stat-resall">+50%</div>
-        <div class="param stat-cold">+30%</div>
-        <div class="param stat-life">+10%</div>
+      <div class="param">1</div>
       </td>
-
-      <td><div class="param">No</div></td>
-
+    <!-- TYP-->
       <td>
-        <div class="param">Ral</div>
-        <div class="param">Ort</div>
-        <div class="param">Tal</div>
+      <div class="param">all</div>
       </td>
-
+    <!-- KLASA -->
       <td>
-        <div class="param stat-life">Extra Life</div>
-        <div class="param stat-fcr">Faster Cast Rate</div>
+      <div class="param">runeword</div>
       </td>
-
+    <!-- AFFIXY -->
       <td>
-        <div class="param stat-life">+30</div>
-        <div class="param stat-fcr">+15%</div>
+        <div class="param af-resall">all resist</div>
+        <div class="param af-cold">cold resist</div>
+        <div class="param af-life">damage to mana</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">+13%</div>
+        <div class="param af-cold">+30%</div>
+        <div class="param af-life">+10%</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+      <div class="param">no</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">ral</div>
+        <div class="param">ort</div>
+        <div class="param">tal</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
       </td>
     </tr>
-
+<!-- CUBE -->
+ <!--Horadric Staff-->
     <tr>
-      <td class="name-runeword"><div class="param">Beast</div></td>
-      <td><div class="param">All</div></td>
-      <td><div class="param">Runeword</div></td>
-
-      <td>
-        <div class="param stat-ed">Enhanced Damage</div>
-        <div class="param stat-frw">Fanaticism Aura</div>
-        <div class="param stat-str">Strength</div>
-        <div class="param stat-ed">Increased Attack Speed</div>
+    <!-- NAZWA-->
+      <td class="name-uq">
+      <div class="param">Horadric Staff</div>
       </td>
-
+    <!-- LVL-->
       <td>
-        <div class="param stat-ed">+240-270%</div>
-        <div class="param stat-frw">Level 5</div>
-        <div class="param stat-str">+25-40</div>
-        <div class="param stat-ed">+40%</div>
+      <div class="param">1</div>
       </td>
-
-      <td><div class="param">No</div></td>
-
+    <!-- TYP-->
       <td>
-        <div class="param">Ber</div>
-        <div class="param">Tir</div>
-        <div class="param">Um</div>
-        <div class="param">Mal</div>
-        <div class="param">Lum</div>
+      <div class="param">staff</div>
       </td>
-
+    <!-- KLASA -->
       <td>
-        <div class="param stat-life">Extra Defense</div>
-        <div class="param stat-fcr">Magic Resist</div>
+      <div class="param">unique</div>
       </td>
-
+    <!-- AFFIXY -->
       <td>
-        <div class="param stat-life">+50</div>
-        <div class="param stat-fcr">+20%</div>
+        <div class="param af-resall">quest</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">2 act</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">thawing potion</div>
+        <div class="param">thawing potion</div>
+        <div class="param">thawing potion</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    </tr><!--Khalim's Will-->
+ <!--Khalim's Will-->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-uq">
+      <div class="param">Khalim's Will</div>
+      </td>
+    <!-- LVL-->
+      <td>
+      <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+      <div class="param">1h-mace</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+      <div class="param">unique</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param af-resall">quest</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">3 act</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">thawing potion</div>
+        <div class="param">thawing potion</div>
+        <div class="param">thawing potion</div>
+        <div class="param">thawing potion</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
       </td>
     </tr>
-
-    <!-- add more rows here... -->
+ <!--Wirt's Leg-->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-uq">
+      <div class="param">Wirt's Leg</div>
+      </td>
+    <!-- LVL-->
+      <td>
+      <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+      <div class="param">1h-mace</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+      <div class="param">unique</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param af-resall">quest</div>
+        <div class="param af-resall">cow level</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">1 act</div>
+        <div class="param af-resall">kill diablo</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">thawing potion</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    </tr>
+ <!--Base Item-->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-uq">
+      <div class="param">Base Item</div>
+      </td>
+    <!-- LVL-->
+      <td>
+      <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+      <div class="param">all</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+      <div class="param">base</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param af-resall">no</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">no</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">thawing potion</div>
+        <div class="param">chipped gem</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    </tr>
+ <!--Reroll Base Item-->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-uq">
+      <div class="param">Reroll Base Item</div>
+      </td>
+    <!-- LVL-->
+      <td>
+      <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+      <div class="param">all</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+      <div class="param">base</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param af-resall">no</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">no</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">thawing potion</div>
+        <div class="param">base item</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    </tr>
+ <!--Gem Upgrade->
+    <tr>
+    <!-- NAZWA-->
+      <td class="name-uq">
+      <div class="param">Gem Upgrade</div>
+      </td>
+    <!-- LVL-->
+      <td>
+      <div class="param">1</div>
+      </td>
+    <!-- TYP-->
+      <td>
+      <div class="param">gem</div>
+      </td>
+    <!-- KLASA -->
+      <td>
+      <div class="param">misc</div>
+      </td>
+    <!-- AFFIXY -->
+      <td>
+        <div class="param af-resall">no</div>
+      </td>
+    <!-- WARTOSCI -->
+      <td>
+        <div class="param af-resall">no</div>
+      </td>
+    <!-- RECEPTA -->
+      <td>
+        <div class="param">gem</div>
+        <div class="param">gem</div>
+      </td>
+    <!-- RW -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SET -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    <!-- SETAFX -->
+      <td>
+        <div class="param">no</div>
+      </td>
+    </tr>
   </tbody>
 </table>
 
 <script>
-/* Populate select filters with unique values from each column */
+/* Populate select filters with uq values from each column */
 function populateSelects() {
   const table = document.getElementById('runewordTable');
   const selects = Array.from(table.tHead.querySelectorAll('select.filter'));
@@ -278,4 +537,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
