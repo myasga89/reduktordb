@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Diablo 2 Runewords - Filterable Table (Fixed selects + cell borders)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root{
+    --bg:#1b1b1b; --panel:#2c2c2c; --muted:#ccc; --cell-border:#888;
+  }
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#f0f0f0;margin:16px;}
+  h2{text-align:center;color:#f9d71c;margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  th,td{padding:8px;text-align:left;vertical-align:top;word-wrap:break-word;border:1px solid var(--cell-border);}
+  th{background:var(--panel);position:sticky;top:0;color:#f9d71c;}
+  tr:nth-child(even){background:#222}
+  tr:hover{background:#3a3a3a}
+  .controls{display:block;}
+  select.filter, input.filter{width:100%;box-sizing:border-box;padding:6px;margin-top:6px;background:#333;border:1px solid #555;color:#fff;border-radius:4px}
+  .param{display:block;padding:4px 6px;margin:4px 0;border-radius:6px;color:#fff;font-weight:600;}
+  /* param colors (examples, distinct shades) */
+  .stat-ed { background:#ff6b6b }   /* enhanced damage */
+  .stat-life { background:#ff9f43 } /* life/extra life */
+  .stat-str { background:#ffd166 }  /* strength */
+  .stat-frw { background:#6bcfff }  /* faster run/walk */
+  .stat-fcr { background:#4ad9a9 }  /* faster cast rate */
+  .stat-resall { background:#86efac }/* resist all */
+  .stat-cold { background:#b3f0ff }  /* cold resist */
+  .stat-gold { background:#f6d365; color:#111 } /* example */
+  /* name classes */
+  .name-runeword{color:silver;font-weight:700}
+  .name-set{color:limegreen;font-weight:700}
+  .name-unique{color:gold;font-weight:700}
+  /* small helper for empty cells */
+  .empty {color:#999;font-style:italic}
+  @media (max-width:900px){
+    th,td{font-size:13px}
+    .param{font-size:13px;padding:3px}
+  }
+</style>
+</head>
+<body>
+
+<h2>DIABLO II RUNEWORDS & SETS — Filterable Table</h2>
+
+<p style="text-align:center;color:#bbb;margin-bottom:8px">Selecty w nagłówkach wypełniają się automatycznie z zawartości tabeli. Wybierz wartość z listy lub wpisz tekst — oba filtry łączą się (AND).</p>
+
+<table id="runewordTable" aria-label="Runewords table">
+  <thead>
+    <tr>
+      <th>
+        Name
+        <select class="filter" data-col="0" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="0" type="text" placeholder="Filter Name" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Type
+        <select class="filter" data-col="1" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="1" type="text" placeholder="Filter Type" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Class
+        <select class="filter" data-col="2" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="2" type="text" placeholder="Filter Class" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Description
+        <select class="filter" data-col="3" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="3" type="text" placeholder="Filter Description" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Numbers
+        <select class="filter" data-col="4" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="4" type="text" placeholder="Filter Numbers" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Cube Ingredients
+        <select class="filter" data-col="5" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="5" type="text" placeholder="Filter Cube" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Runeword Keyword
+        <select class="filter" data-col="6" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="6" type="text" placeholder="Filter Keywords" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Set Description
+        <select class="filter" data-col="7" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="7" type="text" placeholder="Filter Set Desc" oninput="filterAllColumns()">
+      </th>
+
+      <th>
+        Set Numbers
+        <select class="filter" data-col="8" onchange="filterAllColumns()"></select>
+        <input class="filter" data-col="8" type="text" placeholder="Filter Set Numbers" oninput="filterAllColumns()">
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- Example rows -->
+    <tr>
+      <td class="name-runeword"><div class="param">Ancients' Pledge</div></td>
+      <td><div class="param">All</div></td>
+      <td><div class="param">Runeword</div></td>
+
+      <td>
+        <div class="param stat-resall">All Resistances</div>
+        <div class="param stat-cold">Cold Resist</div>
+        <div class="param stat-life">Damage To Mana</div>
+      </td>
+
+      <td>
+        <div class="param stat-resall">+50%</div>
+        <div class="param stat-cold">+30%</div>
+        <div class="param stat-life">+10%</div>
+      </td>
+
+      <td><div class="param">No</div></td>
+
+      <td>
+        <div class="param">Ral</div>
+        <div class="param">Ort</div>
+        <div class="param">Tal</div>
+      </td>
+
+      <td>
+        <div class="param stat-life">Extra Life</div>
+        <div class="param stat-fcr">Faster Cast Rate</div>
+      </td>
+
+      <td>
+        <div class="param stat-life">+30</div>
+        <div class="param stat-fcr">+15%</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="name-runeword"><div class="param">Beast</div></td>
+      <td><div class="param">All</div></td>
+      <td><div class="param">Runeword</div></td>
+
+      <td>
+        <div class="param stat-ed">Enhanced Damage</div>
+        <div class="param stat-frw">Fanaticism Aura</div>
+        <div class="param stat-str">Strength</div>
+        <div class="param stat-ed">Increased Attack Speed</div>
+      </td>
+
+      <td>
+        <div class="param stat-ed">+240-270%</div>
+        <div class="param stat-frw">Level 5</div>
+        <div class="param stat-str">+25-40</div>
+        <div class="param stat-ed">+40%</div>
+      </td>
+
+      <td><div class="param">No</div></td>
+
+      <td>
+        <div class="param">Ber</div>
+        <div class="param">Tir</div>
+        <div class="param">Um</div>
+        <div class="param">Mal</div>
+        <div class="param">Lum</div>
+      </td>
+
+      <td>
+        <div class="param stat-life">Extra Defense</div>
+        <div class="param stat-fcr">Magic Resist</div>
+      </td>
+
+      <td>
+        <div class="param stat-life">+50</div>
+        <div class="param stat-fcr">+20%</div>
+      </td>
+    </tr>
+
+    <!-- add more rows here... -->
+  </tbody>
+</table>
+
+<script>
+/* Populate select filters with unique values from each column */
+function populateSelects() {
+  const table = document.getElementById('runewordTable');
+  const selects = Array.from(table.tHead.querySelectorAll('select.filter'));
+  const columns = selects.map(s => parseInt(s.dataset.col,10));
+  // build set per column
+  const sets = columns.map(()=>new Set());
+  for (let row of table.tBodies[0].rows) {
+    columns.forEach((colIdx,i) => {
+      const cell = row.cells[colIdx];
+      if(!cell) return;
+      // if many div.param -> add each as distinct option
+      const parts = Array.from(cell.querySelectorAll('div.param')).map(d=>d.textContent.trim());
+      if(parts.length){
+        parts.forEach(p => sets[i].add(p));
+      } else {
+        const txt = cell.textContent.trim();
+        if(txt) sets[i].add(txt);
+      }
+    });
+  }
+  // write options
+  selects.forEach((sel,i)=>{
+    const colSet = Array.from(sets[i]).sort((a,b)=>a.localeCompare(b, undefined, {sensitivity:'base'}));
+    // clear and add default
+    sel.innerHTML = '';
+    const optAll = document.createElement('option');
+    optAll.value = ''; optAll.textContent = 'All';
+    sel.appendChild(optAll);
+    colSet.forEach(val=>{
+      const o = document.createElement('option');
+      o.value = val;
+      o.textContent = val;
+      sel.appendChild(o);
+    });
+  });
+}
+
+/* Combined filter: for each column both select and input are considered (AND).
+   If select has value -> require it, if input has value -> require includes match. */
+function filterAllColumns(){
+  const table = document.getElementById('runewordTable');
+  const headerCells = Array.from(table.tHead.rows[0].cells);
+  const filters = headerCells.map(cell=>{
+    const sel = cell.querySelector('select.filter');
+    const inp = cell.querySelector('input.filter');
+    return {
+      select: sel ? sel.value.toString().toLowerCase().trim() : '',
+      input: inp ? inp.value.toString().toLowerCase().trim() : ''
+    };
+  });
+
+  for(let row of table.tBodies[0].rows){
+    let show = true;
+    headerCells.forEach((cell, idx) => {
+      if(!show) return;
+      const filter = filters[idx];
+      if(!filter) return;
+      // assemble cell text from .param blocks or fallback to textContent
+      const cellEl = row.cells[idx];
+      let text = '';
+      if(cellEl){
+        const parts = Array.from(cellEl.querySelectorAll('div.param')).map(d=>d.textContent.trim());
+        text = parts.length ? parts.join(' ').toLowerCase() : cellEl.textContent.trim().toLowerCase();
+      }
+      // if select specified but not found -> hide
+      if(filter.select){
+        if(!text.includes(filter.select)) show = false;
+      }
+      // if input specified but not found -> hide
+      if(filter.input){
+        if(!text.includes(filter.input)) show = false;
+      }
+    });
+    row.style.display = show ? '' : 'none';
+  }
+}
+
+/* Initialize on load */
+document.addEventListener('DOMContentLoaded', () => {
+  populateSelects();
+  // ensure selects/inputs trigger filterAllColumns also if user changes them manually later
+  document.querySelectorAll('select.filter, input.filter').forEach(el=>{
+    el.addEventListener('change', filterAllColumns);
+    el.addEventListener('input', filterAllColumns);
+  });
+});
+</script>
+
+</body>
+</html>
